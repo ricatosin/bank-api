@@ -8,7 +8,7 @@ app.listen(PORT , () => {
  console.log("Server running on port 3000");
 });
 
-const accountController = require("./controllers/accountController");
+const accountController = require("./controllers/account-controller");
 app.use(bodyParser.json());
 app.use("/api", accountController);
 
