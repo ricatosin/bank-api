@@ -1,32 +1,25 @@
 const router = require("express").Router();
-const acc = require("../model/account-model");
+const account = require("../models/account-model");
 
 
-//Create Router as controller to test call to no persistent model !
+exports.account_reset = function(req, res) {
+    account.resetAccounts(account.resetAccounts(account.accounts));
+    res.sendStatus(200);
+};
 
-router.get('/test', (req,res) => {
-    acc.resetAccounts(acc.account);
-    res.json("test");
-})
+exports.account_dummy = function(req, res) {
+    console.log("Entrei");
+    account.dummyAdd(req.body);
+    //res.sendStatus(200);
+    console.log("Sai");
+    res.sendStatus(200);
+};
 
-//RESET ALL ACCOUNT STATES API STATE MEANS RESET ACC ARRAY TO EMPTY
-router.post('/reset', function (req, res) {
-    res.send('RESET ALL ACCOUNTS');
-})
+// Display specif account balance.
+exports.account_balance = function(req, res) {
+    res.send('NOT IMPLEMENTED:  list');
+};
 
-
-router.get('/balance/:account_id', function (req, res) {
-    // Access account_id via: req.params.account_id
-    // or 404
-    res.send(req.params);
-})
-
-//Strange way to handle request... but requested in the api spec
-// Create account : Transfer from accounts : Withdraw from account : Deposit in account 
-router.post('/event',  (req, res, next) => {
-    acc.accountEvent(req.body);
-    res.send(req.body);
-})
-
-
-module.exports = router;
+exports.account_event = function(req, res) {
+    res.send('NOT IMPLEMENTED:  create POST');
+};

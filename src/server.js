@@ -1,16 +1,15 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-//const config = require("./config/serverconfig");
 const PORT = process.env.PORT || 3000;
+const accountRoutes = require("./routes/account-routes");
 
 app.listen(PORT , () => {
  console.log("Server running on port 3000");
 });
 
-const accountController = require("./controllers/account-controller");
 app.use(bodyParser.json());
-app.use("/api", accountController);
+app.use("/api/v1", accountRoutes);
 
 app.get("/api", (req, res) => {
     res.json(["API Version 1.0"]);
