@@ -22,7 +22,14 @@ exports.account_dummy = function(req, res) {
 
 // Display specif account balance.
 exports.account_balance = function(req, res) {
-    res.send();
+    try {
+        await account. (req.params);
+        res.sendStatus(200);
+
+    }catch(err){
+        console.log(err);
+        next();
+    }
 };
 
 exports.account_event = async (req, res, next) => {
@@ -31,7 +38,7 @@ exports.account_event = async (req, res, next) => {
         res.sendStatus(200);
 
     }catch(err){
-        console.log(err); // up to you what to do with the error
+        console.log(err);
         next();
     }
 };

@@ -17,18 +17,6 @@ function resetAccounts (obj) {
     console.log(obj);
 }
 
-function printAcc(obj){
-    console.log(obj);
-}
-
-dummyAdd = (obj) => {
-    accounts.push(obj);
-}
-
-accountEvent = (obj) => {
-    console.log(obj);
-}
-
 getAccountBalance = (obj) => {
     let accountToGetBalance = accounts.find(acc => acc.id === obj.destination);
     return accountToGetBalance.balance;
@@ -63,6 +51,6 @@ actionFromEventType = (obj) => {
     }
 }
 
-module.exports = {actionFromEventType ,getAccountBalance, createAccount, accountEvent ,accounts ,resetAccounts};
+module.exports = {actionFromEventType ,getAccountBalance, createAccount ,accounts ,resetAccounts};
 
 
