@@ -42,6 +42,14 @@ createAccount = (obj) => {
     accounts.push(acc);
 }
 
+withdrawfromAccount = (obj) => {
+    console.log("Witdraw from", obj)
+    let accToWithdraw = accounts.findIndex(acc => acc.id === obj.origin);
+    console.log(accToWithdraw);
+    accounts[accToWithdraw].balance -= obj.amount;
+    console.log(accounts);
+}
+
 actionFromEventType = (obj) => {
     if(obj.type === "deposit"){
         let isDeposit = accounts.findIndex(val => val.id === obj.destination);
@@ -51,8 +59,18 @@ actionFromEventType = (obj) => {
             depositInExistentAccount(obj)
         }
     }
+    //# Withdraw from existing account
+    //POST /event {"type":"withdraw", "origin":"100", "amount":5}
+    if(obj.type === "withdraw"){
+        let accountExists = accounts.findIndex(val => val.id === obj.origin);
+        if(accountExists === -1){
+            return console.error("ACCOUNT NO EXISTS");
+        }else{
+            withdrawfromAccount(obj);
+        }
+    }
 }
 
-module.exports = {actionFromEventType ,getAccountBalance, createAccount ,accounts ,resetAccounts};
+module.exports = {withdrawfromAccount, actionFromEventType ,getAccountBalance, createAccount ,accounts ,resetAccounts};
 
 
