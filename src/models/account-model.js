@@ -17,8 +17,10 @@ function resetAccounts (obj) {
     console.log(obj);
 }
 
-getAccountBalance = (obj) => {
-    let accountToGetBalance = accounts.find(acc => acc.id === obj.destination);
+getAccountBalance = (acc_id) => {
+    console.log(acc_id);
+    let accountToGetBalance = accounts.find(acc => acc.id === acc_id);
+    console.log(accountToGetBalance);
     return accountToGetBalance.balance;
 }
 

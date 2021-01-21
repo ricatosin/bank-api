@@ -12,23 +12,16 @@ exports.account_reset = function(req, res) {
     res.sendStatus(200);
 };
 
-exports.account_dummy = function(req, res) {
-    console.log("Entrei");
-    account.dummyAdd(req.body);
-    //res.sendStatus(200);
-    console.log("Sai");
-    res.sendStatus(200);
-};
 
 // Display specif account balance.
-exports.account_balance = function(req, res) {
+exports.account_balance = async (req, res, next) => {
     try {
-        await account. (req.params);
-        res.sendStatus(200);
+        console.log(req.query.id);
+        let parameter = account.getAccountBalance(req.query.id);
+        res.send(200);
 
     }catch(err){
         console.log(err);
-        next();
     }
 };
 
