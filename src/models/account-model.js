@@ -63,6 +63,6 @@ actionFromEventType = (obj) => {
     }
 }
 
-module.exports = {actionFromEventType ,dummyAdd, createAccount, accountEvent ,accounts ,resetAccounts};
+module.exports = {actionFromEventType ,getAccountBalance, createAccount, accountEvent ,accounts ,resetAccounts};
 
 
