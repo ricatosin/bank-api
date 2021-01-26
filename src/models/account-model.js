@@ -20,8 +20,12 @@ function resetAccounts (obj) {
 getAccountBalance = (acc_id) => {
     console.log(acc_id);
     let accountToGetBalance = accounts.find(acc => acc.id === acc_id);
-    console.log(accountToGetBalance);
-    return accountToGetBalance.balance;
+    if(accountToGetBalance === undefined ){
+        throw new Error('No account found to get balance !');
+    }else {
+        console.log(accountToGetBalance);
+        return accountToGetBalance.balance;
+    }
 }
 
 depositInExistentAccount = (obj) => {
@@ -42,12 +46,24 @@ createAccount = (obj) => {
     accounts.push(acc);
 }
 
+transferFromAccount = (obj) => {
+    console.log("Retira grana da conta");
+    withdrawfromAccount(obj);
+    console.log("Deposita grana na conta");
+    depositInExistentAccount(obj);
+
+}
+
 withdrawfromAccount = (obj) => {
     console.log("Witdraw from", obj)
     let accToWithdraw = accounts.findIndex(acc => acc.id === obj.origin);
-    console.log(accToWithdraw);
-    accounts[accToWithdraw].balance -= obj.amount;
-    console.log(accounts);
+    if(accToWithdraw != -1){
+        throw new Error('No account found to withdraw !');
+    }else{
+        console.log(accToWithdraw);
+        accounts[accToWithdraw].balance -= obj.amount;
+        console.log(accounts);
+    }
 }
 
 actionFromEventType = (obj) => {
@@ -69,8 +85,15 @@ actionFromEventType = (obj) => {
             withdrawfromAccount(obj);
         }
     }
+    //# Transfer from existing account
+    //POST /event {"type":"transfer", "origin":"100", "amount":15, "destination":"300"}
+    //201 {"origin": {"id":"100", "balance":0}, "destination": {"id":"300", "balance":15}}
+    if(obj.type === "transfer"){
+        console.log("Transfer");
+        transferFromAccount(obj);
+    }
 }
 
-module.exports = {withdrawfromAccount, actionFromEventType ,getAccountBalance, createAccount ,accounts ,resetAccounts};
+module.exports = {transferFromAccount, withdrawfromAccount, actionFromEventType ,getAccountBalance, createAccount ,accounts ,resetAccounts};
 
 

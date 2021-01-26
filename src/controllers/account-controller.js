@@ -17,11 +17,12 @@ exports.account_reset = function(req, res) {
 exports.account_balance = async (req, res, next) => {
     try {
         console.log(req.query.id);
-        let parameter = account.getAccountBalance(req.query.id);
-        res.send(200);
+        let parameter = await account.getAccountBalance(req.query.id);
+        res.status(200).send(`${parameter}`);
 
-    }catch(err){
-        console.log(err);
+    }catch(error){
+        res.status(404).send("0");
+        console.log("Nothing found");
     }
 };
 
@@ -32,6 +33,7 @@ exports.account_event = async (req, res, next) => {
 
     }catch(err){
         console.log(err);
+        res.sendStatus(404);
         next();
     }
 };
