@@ -11,7 +11,7 @@ app.listen(config.PORT , () => {
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader(config.HEADERTYPE);
+    res.contentType(config.CONTENTTYPE);
     next();
   });
 
