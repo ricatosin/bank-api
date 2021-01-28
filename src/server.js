@@ -9,6 +9,12 @@ app.listen(config.PORT , () => {
 });
 
 app.use(bodyParser.json());
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(config.HEADERTYPE);
+    next();
+  });
+
 app.use("/api/v1", accountRoutes);
 
 app.get("/api", (req, res) => {
