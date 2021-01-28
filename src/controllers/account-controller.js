@@ -9,7 +9,8 @@ exports.account_test = function(req, res) {
 
 exports.account_reset = function(req, res) {
     account.resetAccounts(account.resetAccounts(account.accounts));
-    res.sendStatus(200);
+    res.type('application/json');
+    res.status(200).send("OK");
 };
 
 
@@ -18,6 +19,7 @@ exports.account_balance = async (req, res, next) => {
     try {
         console.log(req.query.id);
         let parameter = await account.getAccountBalance(req.query.id);
+        res.type('application/json');
         res.status(200).send(`${parameter}`);
 
     }catch(error){
