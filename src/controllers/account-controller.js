@@ -28,8 +28,9 @@ exports.account_balance = async (req, res, next) => {
 
 exports.account_event = async (req, res, next) => {
     try {
-        await account.actionFromEventType(req.body);
-        res.sendStatus(200);
+        let valueToReturn = await account.actionFromEventType(req.body);
+        res.type('application/json')
+        res.status(201).send(valueToReturn);
 
     }catch(err){
         console.log(err);

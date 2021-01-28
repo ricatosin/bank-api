@@ -9,7 +9,6 @@ function account(id, balance){
 
 }
 
-
 function resetAccounts (obj) {
     console.log(obj);
     console.log("RESETED");
@@ -34,6 +33,7 @@ depositInExistentAccount = (obj) => {
     console.log(accToDeposit);
     accounts[accToDeposit].balance += obj.amount;
     console.log(accounts);
+    return JSON.stringify({"destination": {"id":obj.destination, "balance":accounts[accToDeposit].balance}});
 
 }
 
@@ -44,6 +44,8 @@ createAccount = (obj) => {
     console.log(acc.id);
     console.log(acc.balance);
     accounts.push(acc);
+    return JSON.stringify({"destination": {"id":obj.destination, "balance":acc.balance}});
+    
 }
 
 transferFromAccount = (obj) => {
@@ -51,18 +53,19 @@ transferFromAccount = (obj) => {
     withdrawfromAccount(obj);
     console.log("Deposita grana na conta");
     depositInExistentAccount(obj);
-
 }
 
 withdrawfromAccount = (obj) => {
     console.log("Witdraw from", obj)
     let accToWithdraw = accounts.findIndex(acc => acc.id === obj.origin);
-    if(accToWithdraw != -1){
+    if(accToWithdraw === -1){
         throw new Error('No account found to withdraw !');
     }else{
         console.log(accToWithdraw);
         accounts[accToWithdraw].balance -= obj.amount;
         console.log(accounts);
+        console.log (JSON.stringify({"origin": {"id":obj.origin, "balance":accounts[accToWithdraw].balance}}));
+        return JSON.stringify({"origin": {"id":obj.origin, "balance":accounts[accToWithdraw].balance}});
     }
 }
 
@@ -70,9 +73,9 @@ actionFromEventType = (obj) => {
     if(obj.type === "deposit"){
         let isDeposit = accounts.findIndex(val => val.id === obj.destination);
         if(isDeposit === -1){
-            createAccount(obj);
+            return createAccount(obj);
         }else{
-            depositInExistentAccount(obj)
+            return depositInExistentAccount(obj);
         }
     }
     //# Withdraw from existing account
@@ -82,7 +85,7 @@ actionFromEventType = (obj) => {
         if(accountExists === -1){
             return console.error("ACCOUNT NO EXISTS");
         }else{
-            withdrawfromAccount(obj);
+           return withdrawfromAccount(obj);
         }
     }
     //# Transfer from existing account

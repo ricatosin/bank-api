@@ -1,10 +1,10 @@
 const express = require("express");
+const config = require("./config/config")
 const app = express();
 const bodyParser = require("body-parser");
-const PORT = process.env.PORT || 3000;
 const accountRoutes = require("./routes/account-routes");
 
-app.listen(PORT , () => {
+app.listen(config.PORT , () => {
  console.log("Server running on port 3000");
 });
 
