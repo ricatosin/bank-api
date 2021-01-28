@@ -5,16 +5,12 @@ const bodyParser = require("body-parser");
 const accountRoutes = require("./routes/account-routes");
 
 app.listen(config.PORT , () => {
- console.log("Server running on port 3000");
+ console.log("Server running on port 80");
 });
 
 app.use(bodyParser.json());
 
-app.use("/api/v1", accountRoutes, function(req, res, next){
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.type('application/json');
-    next();
-});
+app.use("/", accountRoutes);
 
 app.get("/api", (req, res) => {
     res.json(["API Version 1.0"]);
