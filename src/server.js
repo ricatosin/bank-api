@@ -12,6 +12,6 @@ app.use(bodyParser.json());
 
 app.use("/", accountRoutes);
 
-app.get("/api", (req, res) => {
-    res.json(["API Version 1.0"]);
+app.get("/", (req, res) => {
+    res.json("Bank-Api - Version 1.0");
 });
