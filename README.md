@@ -1,7 +1,7 @@
 [![BANK-API]](https://rtosin.herokuapp.com/)
-This project is my implementation of a Bank-Api is an Non-Persistent Endpoint developed with NodeJs and Express.
+This project is my implementation of a Bank-Api is a Non-Persistent Endpoint developed with NodeJs and Express.
 
-Bank Api is a simple non persisten Api that simulate account Creation and some othjer basic functionalities .
+Bank Api is a simple non persisten Api that simulate account Creation and some other basic functionalities .
 
 ## Getting Started
 
